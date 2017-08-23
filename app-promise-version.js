@@ -3,6 +3,9 @@ const geocode = require('./geocode/geocode.js')
 const weather = require('./weather/weather.js')
 const axios = require('axios');
 
+
+//ways to expand: default location, more information
+
 const argv = yargs
   .options({
     a: {
@@ -23,8 +26,8 @@ axios.get(geoURL).then((response)=> {
   if (response.data.status === 'ZERO_RESULTS'){
     throw new Error ('Unable to find that address'); //throws error so it can go straight to catch
   }
-  let lat = response.data.results[0].geometry.location.lat
-  let long = response.data.results[0].geometry.location.lng
+  let lat = response.data.results[0].geometry.location.lat;
+  let long = response.data.results[0].geometry.location.lng;
   let weatherURL = `https://api.darksky.net/forecast/054616478fd4c54f7275eda745f5c309/${lat},${long}`
 
 
@@ -32,6 +35,10 @@ axios.get(geoURL).then((response)=> {
 
   return axios.get(weatherURL)
   //response.data --- data is an auto-property of the response argument passed in
+}).then((response)=>{
+  let temperature = response.data.currently.temperature;
+  let appTemperature = response.data.currently.apparentTemperature;
+  console.log(`It's current ${temperature}, but it feels like ${appTemperature}`);
 }).catch((error) => {
 
   if (e.code === "ENOTFOUND"){
