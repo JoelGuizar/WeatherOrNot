@@ -1,5 +1,8 @@
 const request = require('request')
 
+//secret key: 054616478fd4c54f7275eda745f5c309
+
+
 const geocodeAddress = (address, cb) => {
   let encoded = encodeURIComponent(address) //a or address will work automatically since already defined
   let url = `http://maps.googleapis.com/maps/api/geocode/json?address=${encoded}`
