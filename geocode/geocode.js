@@ -21,7 +21,7 @@ const geocodeAddress = (address, cb) => {
       let loc = body.results[0].geometry.location
       cb(undefined, {
         address: body.results[0].formatted_address,
-        lattitude: loc.lat,
+        latitude: loc.lat,
         longitude: loc.lng
       })
     }

@@ -21,7 +21,12 @@ geocode.geocodeAddress(argv.address, (errorMessage, results) => {
   if (errorMessage){
     console.log(errorMessage);
   } else {
-    weather.getWeather()
-    //console.log(JSON.stringify(results, undefined, 2));
+    weather.getWeather(results.latitude, results.longitude, (errMessage, res) =>{
+      if (errMessage){
+        console.log(errMessage);
+      } else {
+        console.log(JSON.stringify(res, undefined, 2));
+      }
+    });
   }
 })
